@@ -1,38 +1,99 @@
+/* App.css */
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f7f7f5;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0 auto;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #ffffff;
+  min-height: 10vh; /* Adjusted for more compact header */
+  width: 100%; /* Full width */
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Full width */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.upload-container {
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 }
+
+input[type="file"] {
+  margin: 10px 0;
+  padding: 10px;
+}
+
+button {
+  background-color: #07bac7;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #203d4d;
+}
+
+/* Style for the label that acts as the "Choose File" button */
+.file-input-container {
+  display: inline-block; /* Or block, depending on layout */
+  background-color: #07bac7;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Optional: Styling for when the mouse hovers over the label */
+.file-input-container:hover {
+  background-color: #203d4d;
+}
+
+.tutorial-link {
+  display: block; /* Makes the margin applicable */
+  margin-bottom: 90px; /* Adjust the value as needed */
+  font-family: 'Inter', sans-serif;
+}
+
+
+.App-logo {
+  max-height: 85px; /* Adjust the size as needed */
+  width: auto;
+  margin-bottom: 20px;
+}
+
