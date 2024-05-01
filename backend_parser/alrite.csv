@@ -1,0 +1,22 @@
+﻿Node,Question,Values,Child Nodes,Type,,Value,Legend
+1,Patient initials,X,2,1,,0,yes/no
+2,"Child's sex,age,weight,MUAC",X,3,1,,1,dropdown
+3,WHO Danger signs,"yes,no","4,5",0,,2,input
+4,Severe pneumonia or severe disease,x,x,1,,,
+5,Cough or difficulty breathing?,"yes,no","7,6",0,,,
+6,No signs of pnemonia or wheezing illness,X,20,1,,,
+7,How many days of sypmtoms?,X,8,1,,,
+8,HIV status,X,9,1,,,
+9,Temperature or febrile to touch,X,10,1,,,
+10,Oxygen saturation,X,11,1,,,
+11,<90%,"yes,no","4,12",0,,,
+12,RR counter,X,13,1,,,
+13,Stridor,"yes,no","4,14",0,,,
+14,Breath sounds,X,15,1,,,
+15,Grunting or nasal flaring,"yes,no","4,16",0,,,
+16,Chest indrawing,X,17,1,,,
+17,Diagnosis Screen,X,18,1,,,
+18,Meets criteria for bronchdilator trial?,"yes,no","19,20",0,,,
+19,Bronchdilator tiral reassess in 15 min,X,21,1,,,
+20,Save and close,X,X,1,,,
+21,Reassessment screens,X,17,1,,,

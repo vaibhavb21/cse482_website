@@ -2,6 +2,7 @@ import csv
 from dataclasses import dataclass
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import json
 
 app = Flask(__name__)
 CORS(app)  # <--- Added this line
@@ -22,6 +23,78 @@ class Node:
 
     def __eq__(self, other):
         return hash(self.id) == hash(other.id)
+
+
+# def tree_to_json(tree, node_id):
+#     node = tree.get(node_id)
+#     if node:
+#         node_data = {
+#             'id': node.id,
+#             'question': node.question,
+#             'values': node.values,
+#             'type': node.type,
+#             'children': []
+#         }
+
+#         for child_id in node.children:
+#             if child_id == 'x':
+#                 return None
+#             if child_id != 'x':
+#                 child_node = tree_to_json(tree, int(child_id))
+#                 node_data['children'].append(child_node)
+
+#         return node_data
+#     else:
+#         return None
+
+def tree_to_json(tree, node_id, visited=None):
+    # Initialize the visited set if it's the first call
+    if visited is None:
+        visited = set()
+
+    # Fetch the node from the tree
+    node = tree.get(node_id)
+
+    # Base case: if the node does not exist or has already been visited (to prevent cycles)
+    if node is None or node_id in visited:
+        return None
+
+    # Mark the current node as visited
+    visited.add(node_id)
+
+    # Prepare the node data for JSON conversion
+    node_data = {
+        'id': node.id,
+        'question': node.question,
+        'values': node.values,
+        'type': node.type,
+        'children': []
+    }
+
+    # Recursively handle all children that are not marked by 'x'
+    for child_id in node.children:
+        if child_id.strip().lower() != 'x':
+            try:
+                # Convert child_id to integer and process if valid
+                child_node = tree_to_json(tree, int(child_id), visited)
+                if child_node:
+                    node_data['children'].append(child_node)
+            except ValueError:
+                # Handle the case where child_id is not a valid integer
+                print(f"Warning: Skipping invalid child ID '{child_id}'")
+
+    return node_data
+
+
+
+@app.route('/get_tree', methods=['GET'])
+def get_tree():
+    tree = build_tree('alrite.csv')
+    root_node_id = 1  # Replace with the ID of your root node
+    tree_json = tree_to_json(tree, root_node_id)
+    print(json.dumps(tree_json, indent=4))
+    return jsonify(tree_json)
+
 
 def build_tree(file_path):
     nodes = {}
@@ -104,9 +177,13 @@ def hello_world():
     return jsonify({'message': 'Hello World'})
 
 
-# tree = build_tree('/Users/priyanshusugasani/Desktop/cse482/alrite.csv')
+#tree = build_tree('/Users/priyanshusugasani/Desktop/cse482/alrite.csv')
 # traverse_tree(tree, tree[1])
 # print(references)
+tree = build_tree('alrite.csv')
+root_node_id = 1  # Replace with the ID of your root node
+tree_json = tree_to_json(tree, root_node_id)
+print(json.dumps(tree_json, indent=4))
 
 if __name__ == '__main__':
     app.run()
