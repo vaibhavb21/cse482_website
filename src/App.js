@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Tutorial from './pages/TutorialPage';
@@ -20,6 +20,21 @@ const App = () => {
             console.log('No file selected.');
         }
     };
+    
+    const [message, setMessage] = useState('');
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/hello')
+            .then(response => {
+                setMessage(response.data.message);
+            })
+            .catch(error => {
+                // Handle the error here. For example, log the error or set an error message state.
+                console.error('Error fetching data:', error);
+                setMessage('Failed to load message');
+            });
+    }, []);
+    
 
     return (
     <Router>
@@ -48,6 +63,9 @@ const App = () => {
                 {/*<Route path="/" element={<YourMainComponent/>}/>*/}
                 <Route exact path="/tutorial" element={<Tutorial/>}/>
             </Routes>
+        </div>
+        <div>
+            <h1>{message}</h1>
         </div>
     </Router>
     );
