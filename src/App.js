@@ -112,7 +112,7 @@ const MyComponent = ({ tree }) => {
 
 const App = () => {
     const [file, setFile] = useState(null);
-    const [tree, setTree] = useState(null);
+    const [tree, setTree] = useState('');
     const [message, setMessage] = useState('');
 
     const handleFileChange = (e) => {
@@ -128,18 +128,30 @@ const App = () => {
                 console.error('Error fetching data:', error);
                 setMessage('Failed to load message');
             });
+        
+        axios.get('http://localhost:5000/get_tree')
+        .then(response => {
+            console.log("response message:")
+            console.log(response);
+            setTree(response.data);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            setTree('Failed to load message');
+        });
 
-        const fetchTree = async () => {
-            try {
-                const response = await axios.get('/get_tree');
-                setTree(response.data);
-            } catch (error) {
-                console.error('Error fetching tree:', error);
-            }
-        };
+        // const fetchTree = async () => {
+        //     try {
+        //         const response = await axios.get('/get_tree');
+        //         setTree(response.data);
+        //     } catch (error) {
+        //         console.error('Error fetching tree:', error);
+        //     }
+        // };
 
-        fetchTree();
+        // fetchTree();
     }, []);
+
 
     return (
         <Router>
@@ -168,6 +180,9 @@ const App = () => {
             </div>
             <div>
                 <h1>{message}</h1>
+            </div>
+            <div>
+                <h1>{JSON.stringify(tree)}</h1>
             </div>
         </Router>
     );

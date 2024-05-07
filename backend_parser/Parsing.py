@@ -49,18 +49,20 @@ class Node:
 
 def tree_to_json(tree, node_id, visited=None):
     # Initialize the visited set if it's the first call
-    if visited is None:
-        visited = set()
+    # if visited is None:
+    #     visited = set()
 
     # Fetch the node from the tree
     node = tree.get(node_id)
 
     # Base case: if the node does not exist or has already been visited (to prevent cycles)
-    if node is None or node_id in visited:
+    # if node is None or node_id in visited:
+    #     return None
+    if node is None:
         return None
 
     # Mark the current node as visited
-    visited.add(node_id)
+    #  visited.add(node_id)
 
     # Prepare the node data for JSON conversion
     node_data = {
@@ -84,7 +86,6 @@ def tree_to_json(tree, node_id, visited=None):
                 print(f"Warning: Skipping invalid child ID '{child_id}'")
 
     return node_data
-
 
 
 @app.route('/get_tree', methods=['GET'])
@@ -126,6 +127,11 @@ def sendNode(current_node):
         return jsonify(node_data)
     else:
         return jsonify({'error': 'Invalid node. Please check the data.'})
+
+
+@app.route('/hello', methods=['GET'])
+def hello_world():
+    return jsonify({'message': 'Hello World'})
 
 
 @app.route('/process_user_input', methods=['POST'])
@@ -172,15 +178,12 @@ def traverse_tree(tree, current):
         print("Invalid node. Please check the data.")
 
 
-@app.route('/hello', methods=['GET'])
-def hello_world():
-    return jsonify({'message': 'Hello World'})
 
-
-#tree = build_tree('/Users/priyanshusugasani/Desktop/cse482/alrite.csv')
+# tree = build_tree('/Users/priyanshusugasani/Desktop/cse482/alrite.csv')
 # traverse_tree(tree, tree[1])
 # print(references)
 tree = build_tree('alrite.csv')
+# print(tree)
 root_node_id = 1  # Replace with the ID of your root node
 tree_json = tree_to_json(tree, root_node_id)
 print(json.dumps(tree_json, indent=4))
