@@ -1,10 +1,17 @@
-import React, { useRef, useState } from 'react'; // Import useState here
+import React, { useState } from 'react'; // Import useState here
 
 const TextBox = () => {
-    const [something, setSomething] = useState('');
+    const [textBoxContent, setTextBoxContent] = useState('');
+    const [savedContent, setSavedContent] = useState('');
+
+    const handleNextClick = () => {
+        setSavedContent(textBoxContent);
+    };
+
     return (
         <div>
-            <textarea value={something} onChange={(e) => setSomething(e.target.value)}></textarea>
+            <textarea value={textBoxContent} onChange={(e) => setTextBoxContent(e.target.value)}></textarea>
+            <button onClick={handleNextClick}>Next</button>
         </div>
     );
 };
