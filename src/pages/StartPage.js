@@ -1,14 +1,14 @@
 import React from 'react';
+import TextBox from '../components/TextBox';
 
 const StartPage = ({treeProp}) => {
     
     return (
-        <div>
+      <div>
         {treeProp !== null ? (
           <>
             <h1>{treeProp.question}</h1>
-            <button>yes</button>
-            <button>no</button>
+            <TextBox />
           </>
         ) : (
           <h2>No data available</h2>

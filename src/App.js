@@ -58,6 +58,7 @@ const App = () => {
                                         Choose File
                                         <input type="file" onChange={handleFileChange} accept=".csv" style={{ display: 'none' }} />
                                     </label>
+                                    <div></div>
                                     <button>
                                         <Link to="/StartPage">Start Page</Link>
                                     </button>
