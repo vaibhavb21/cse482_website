@@ -7,7 +7,7 @@ import Tutorial from './pages/TutorialPage';
 
 const App = () => {
     const [file, setFile] = useState(null);
-    const [tree, setTree] = useState('');
+    const [tree, setTree] = useState(null);
     const [message, setMessage] = useState('');
 
     const handleFileChange = (e) => {
@@ -15,7 +15,7 @@ const App = () => {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:5000/hello')
+        axios.get('http://localhost:5001/hello')
             .then(response => {
                 setMessage(response.data.message);
             })
@@ -24,17 +24,23 @@ const App = () => {
                 setMessage('Failed to load message');
             });
 
-        axios.get('http://localhost:5000/get_tree')
+        axios.get('http://localhost:5001/get_tree')
         .then(response => {
-            console.log("response message:")
-            console.log(response);
+            // console.log("response message:")
+            // console.log(response);
             setTree(response.data);
+            // console.log(tree);
+            // console.log(JSON.stringify(tree));
         })
         .catch(error => {
             console.error('Error fetching data:', error);
             setTree('Failed to load message');
         });
     }, []);
+
+    // if(tree != null) {
+    //     console.log(JSON.stringify(tree.children[0].question));
+    // }
 
     return (
         <Router>
@@ -58,7 +64,7 @@ const App = () => {
                                 </div>
                             }
                         />
-                        <Route path="/StartPage" element={<StartPage />} />
+                        <Route path="/StartPage" element={<StartPage treeProp={tree} />} />
                         <Route path="/tutorial" element={<Tutorial />} />
                     </Routes>
                 </main>

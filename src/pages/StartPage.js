@@ -1,11 +1,19 @@
 import React from 'react';
 
-const StartPage = () => {
+const StartPage = ({treeProp}) => {
+    
     return (
         <div>
-            <h1>Start Questionnaire</h1>
-            <p>This is the start page for the questionnaire.</p>
-        </div>
+        {treeProp !== null ? (
+          <>
+            <h1>{treeProp.question}</h1>
+            <button>yes</button>
+            <button>no</button>
+          </>
+        ) : (
+          <h2>No data available</h2>
+        )}
+      </div>
     );
 };
 
