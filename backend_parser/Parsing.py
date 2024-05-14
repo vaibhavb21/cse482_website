@@ -189,4 +189,4 @@ tree_json = tree_to_json(tree, root_node_id)
 print(json.dumps(tree_json, indent=4))
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5001)
