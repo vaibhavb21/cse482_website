@@ -65,7 +65,7 @@ const StartPage = ({treeProp}) => {
             type="text"
             value={inputValue}
             onChange={handleChange}
-            placeholder="Enter your choice"
+            placeholder="Enter your answer"
           />
           <button onClick={handleNext}>Next</button>
           {/* {currentNode.values.map((value, index) => (

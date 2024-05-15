@@ -4,14 +4,21 @@ import './App.css';
 import axios from "axios";
 import StartPage from "./pages/StartPage";
 import Tutorial from './pages/TutorialPage';
+import { FaUpload } from 'react-icons/fa'; // Add this line to import the upload icon
 
 const App = () => {
     const [file, setFile] = useState(null);
     const [tree, setTree] = useState(null);
     const [message, setMessage] = useState('');
+    const [fileInfo, setFileInfo] = useState({ name: '', size: 0 });
 
     const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
+        const selectedFile = e.target.files[0];
+        setFile(selectedFile);
+        setFileInfo({
+            name: selectedFile.name,
+            size: selectedFile.size
+        });
     };
 
     useEffect(() => {
@@ -26,11 +33,7 @@ const App = () => {
 
         axios.get('http://localhost:5001/get_tree')
         .then(response => {
-            // console.log("response message:")
-            // console.log(response);
             setTree(response.data);
-            // console.log(tree);
-            // console.log(JSON.stringify(tree));
         })
         .catch(error => {
             console.error('Error fetching data:', error);
@@ -38,15 +41,11 @@ const App = () => {
         });
     }, []);
 
-    // if(tree != null) {
-    //     console.log(JSON.stringify(tree.children[0].question));
-    // }
-
     return (
         <Router>
             <div className="App">
                 <header className="App-header">
-                    <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="Protocol Logo" className="App-logo"/>
+                    <img src={`${process.env.PUBLIC_URL}/newlogo.png`} alt="Protocol Logo" className="App-logo"/>
                 </header>
                 <main>
                     <Routes>
@@ -54,14 +53,24 @@ const App = () => {
                             path="/"
                             element={
                                 <div className="upload-container">
+                                    <h1>Welcome to Protocol</h1>
                                     <label className="file-input-container">
-                                        Choose File
+                                        <FaUpload className="upload-icon" /> {/* Add this line to include the icon */}
+                                        Upload a CSV File
                                         <input type="file" onChange={handleFileChange} accept=".csv" style={{ display: 'none' }} />
                                     </label>
                                     <div></div>
-                                    <button>
-                                        <Link to="/StartPage">Start Page</Link>
-                                    </button>
+                                    {file && (
+                                        <>
+                                            <div className="file-info">
+                                                <p><strong>File Name:</strong> {fileInfo.name}</p>
+                                                <p><strong>File Size:</strong> {fileInfo.size} bytes</p>
+                                            </div>
+                                            <button>
+                                                <Link to="/StartPage">Start Page</Link>
+                                            </button>
+                                        </>
+                                    )}
                                 </div>
                             }
                         />

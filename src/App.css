@@ -22,10 +22,11 @@ body, html {
   min-height: 10vh; /* Adjusted for more compact header */
   width: 100%; /* Full width */
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* Change to align items to the start */
   align-items: center;
+  padding-left: 20px; /* Add padding to the left */
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black; /* Change color to black */
 }
 
 main {
@@ -66,9 +67,53 @@ button:hover {
   background-color: #203d4d;
 }
 
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+  margin: 20px 0;
+  padding: 10px 0;
+  border-bottom: 2px solid #07bac7; /* Green border to match the button */
+  text-align: center; /* Center align for a balanced look */
+  font-family: 'Arial', sans-serif;
+}
+
+
+/*textarea {*/
+/*  width: 80%; !* Adjust width to fit the form area *!*/
+/*  height: 150px; !* Sufficient height for text input *!*/
+/*  padding: 10px; !* Comfortable padding for typing *!*/
+/*  margin-top: 10px; !* Space above the textarea *!*/
+/*  border: 2px solid #07bac7; !* Border color matching the button *!*/
+/*  border-radius: 5px; !* Rounded corners like buttons *!*/
+/*  font-family: 'Inter', sans-serif; !* Consistent font usage *!*/
+/*  font-size: 16px; !* Readable text size *!*/
+/*  background-color: #ffffff; !* Background color matching the theme *!*/
+/*  color: black; !* Text color for visibility *!*/
+/*  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); !* Subtle shadow for depth *!*/
+/*  resize: vertical; !* Allow vertical resizing only *!*/
+/*}*/
+
+/*textarea:focus {*/
+/*  border-color: #203d4d; !* Darker border on focus for visibility *!*/
+/*  outline: none; !* Remove default focus outline *!*/
+/*}*/
+
+
 /* Style for the label that acts as the "Choose File" button */
 .file-input-container {
-  display: inline-block; /* Or block, depending on layout */
+  display: inline-flex; /* Use inline-flex to align items */
+  align-items: center; /* Center items vertically */
   background-color: #07bac7;
   color: white;
   border: none;
@@ -77,6 +122,10 @@ button:hover {
   cursor: pointer;
   font-size: 16px;
   text-align: center;
+}
+
+.upload-icon {
+  margin-right: 10px; /* Add some space between icon and text */
 }
 
 /* Optional: Styling for when the mouse hovers over the label */
@@ -90,10 +139,9 @@ button:hover {
   font-family: 'Inter', sans-serif;
 }
 
-
 .App-logo {
-  max-height: 85px; /* Adjust the size as needed */
+  max-height: 40px; /* Adjust the size as needed */
   width: auto;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+  margin-left: 20px;
 }
-
