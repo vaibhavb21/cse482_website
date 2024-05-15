@@ -4,7 +4,7 @@ import './App.css';
 import axios from "axios";
 import StartPage from "./pages/StartPage";
 import Tutorial from './pages/TutorialPage';
-import { FaUpload } from 'react-icons/fa'; // Add this line to import the upload icon
+import { FaUpload } from 'react-icons/fa';
 
 const App = () => {
     const [file, setFile] = useState(null);

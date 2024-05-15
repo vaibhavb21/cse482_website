@@ -78,14 +78,24 @@ input[type="text"] {
   font-size: 16px;
 }
 
+h1 {
+  font-size: 36px;
+  color: #333;
+  margin: 20px 0;
+  padding: 10px 0;
+  border-top: 2px solid #07bac7; /* Blue border to match the button */
+  text-align: center; /* Center align for a balanced look */
+  font-family: 'Inter', sans-serif;
+}
+
 h2 {
   font-size: 24px;
   color: #333;
   margin: 20px 0;
   padding: 10px 0;
-  border-bottom: 2px solid #07bac7; /* Green border to match the button */
+  border-bottom: 2px solid #07bac7; /* Blue border to match the button */
   text-align: center; /* Center align for a balanced look */
-  font-family: 'Arial', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 

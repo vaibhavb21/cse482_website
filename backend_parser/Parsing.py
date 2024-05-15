@@ -1,11 +1,11 @@
 import csv
 from dataclasses import dataclass
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 from flask_cors import CORS
 import json
 
 app = Flask(__name__)
-CORS(app)  # <--- Added this line
+CORS(app)  # Necessary to avoid issues with CORS on browsers
 
 references = {}
 
@@ -25,44 +25,13 @@ class Node:
         return hash(self.id) == hash(other.id)
 
 
-# def tree_to_json(tree, node_id):
-#     node = tree.get(node_id)
-#     if node:
-#         node_data = {
-#             'id': node.id,
-#             'question': node.question,
-#             'values': node.values,
-#             'type': node.type,
-#             'children': []
-#         }
-
-#         for child_id in node.children:
-#             if child_id == 'x':
-#                 return None
-#             if child_id != 'x':
-#                 child_node = tree_to_json(tree, int(child_id))
-#                 node_data['children'].append(child_node)
-
-#         return node_data
-#     else:
-#         return None
-
 def tree_to_json(tree, node_id, visited=None):
-    # Initialize the visited set if it's the first call
-    # if visited is None:
-    #     visited = set()
-
     # Fetch the node from the tree
     node = tree.get(node_id)
 
     # Base case: if the node does not exist or has already been visited (to prevent cycles)
-    # if node is None or node_id in visited:
-    #     return None
     if node is None:
         return None
-
-    # Mark the current node as visited
-    #  visited.add(node_id)
 
     # Prepare the node data for JSON conversion
     node_data = {
@@ -113,7 +82,7 @@ def build_tree(file_path):
     return nodes
 
 
-# return the next node
+# Return the next node
 @app.route('/sendNextNode', methods=['GET'])
 def sendNode(current_node):
     if current_node:
@@ -145,7 +114,7 @@ def traverse_tree(tree, current):
     user_choices = []
     user_input = None
     if len(current.values) > 1:
-        # multiple branches
+        # Multiple branches
         user_question = ", ".join(current.values[:-1]) + f" or {current.values[-1]}?"
         user_input = input(user_question).strip().lower()
 
@@ -159,7 +128,6 @@ def traverse_tree(tree, current):
     else:
         user_input = input("Answer: ").strip()
         user_choices = [user_input]
-    # references[hash(current)] = user_input
     references[current.id] = user_input
 
     if current.children[0] == "x":
@@ -178,12 +146,7 @@ def traverse_tree(tree, current):
         print("Invalid node. Please check the data.")
 
 
-
-# tree = build_tree('/Users/priyanshusugasani/Desktop/cse482/alrite.csv')
-# traverse_tree(tree, tree[1])
-# print(references)
 tree = build_tree('alrite.csv')
-# print(tree)
 root_node_id = 1  # Replace with the ID of your root node
 tree_json = tree_to_json(tree, root_node_id)
 print(json.dumps(tree_json, indent=4))

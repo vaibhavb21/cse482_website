@@ -1,28 +1,4 @@
-// import React from 'react';
-// import TextBox from '../components/TextBox';
-// import BinaryOption from '../components/BinaryOption'
-
-// const StartPage = ({treeProp}) => {
-    
-//     return (
-//       <div>
-//         {treeProp !== null ? (
-//           <>
-//             <h1>{treeProp.question}</h1>
-//             <TextBox />
-//           </>
-//         ) : (
-//           <h2>No data available</h2>
-//         )}
-//       </div>
-//     );
-// };
-
-// export default StartPage;
-
 import React, { useState } from 'react';
-
-const jsonData = {/* Paste your JSON data here */};
 
 const StartPage = ({treeProp}) => {
   const [currentNode, setCurrentNode] = useState(treeProp);
@@ -58,7 +34,7 @@ const StartPage = ({treeProp}) => {
 
   return (
     <div>
-      {currentNode ? (
+      {currentNode.children.length > 0 ? (
         <>
           <h2>{currentNode.question}</h2>
           <input
@@ -75,7 +51,10 @@ const StartPage = ({treeProp}) => {
           ))} */}
         </>
       ) : (
-        <p>No more questions. End of the tree.</p>
+        <div>
+          <h1>Recommended Diagnosis:</h1>
+          <h2>{currentNode.question}</h2>
+        </ div>
       )}
     </div>
   );
