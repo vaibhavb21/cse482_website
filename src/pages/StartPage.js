@@ -20,11 +20,20 @@ const StartPage = ({treeProp}) => {
       nextNode = currentNode.children[0];
     } else {
       const values = currentNode.values;
-      const index = values.indexOf(inputValue);
-      console.log('values[0] is ', values[0]);
-      console.log('index is', index);
-      if (index !== -1 && index < currentNode.children.length) {
-        nextNode = currentNode.children[index];
+      const regex = /[<>=]/;
+      const containsSymbol = values.some(condition => regex.test(condition))
+      if(containsSymbol){
+        const index = values.findIndex(value => parseAndEvaluate(value, inputValue));
+        if (index !== -1 && index < currentNode.children.length) {
+          nextNode = currentNode.children[index];
+        }
+      }else{
+        const index = values.indexOf(inputValue);
+        console.log('values[0] is ', values[0]);
+        console.log('index is', index);
+        if (index !== -1 && index < currentNode.children.length) {
+          nextNode = currentNode.children[index];
+        }
       }
     }
 

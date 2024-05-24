@@ -1,6 +1,6 @@
 import csv
 from dataclasses import dataclass
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import json
 
@@ -57,7 +57,21 @@ def tree_to_json(tree, node_id, visited=None):
     return node_data
 
 
+@app.route('/upload_file', methods=['POST'])
+def upload_file():
+    file = request.files['file']
+    file_contents = file.stream.read().decode('utf-8')
+    csv_data = csv.reader(file_contents.splitlines())
+    print(csv_data)
+    # Process the CSV data here
+    tree = build_tree(csv_data)
+    root_node_id = 1  # Replace with the ID of your root node
+    tree_json = tree_to_json(tree, root_node_id)
+    return jsonify(tree_json)
+
+
 @app.route('/get_tree', methods=['GET'])
+# @app.route('/upload_file', methods=['POST'])
 def get_tree():
     tree = build_tree('alrite.csv')
     root_node_id = 1  # Replace with the ID of your root node
@@ -66,19 +80,18 @@ def get_tree():
     return jsonify(tree_json)
 
 
-def build_tree(file_path):
+def build_tree(tree):
     nodes = {}
-    with open(file_path, 'r') as file:
-        reader = csv.reader(file)
-        next(reader)
-        for row in reader:
-            node_id = int(row[0])
-            question = row[1]
-            values = [value.strip() for value in row[2].split(',')]
-            child_ids = [child_id.strip() for child_id in row[3].split(',')]
-            type = int(row[4])
-            node = Node(node_id, question, values, child_ids, type)
-            nodes[int(node_id)] = node
+    next(tree)
+    for row in tree:
+        print(row)
+        node_id = int(row[0])
+        question = row[1]
+        values = [value.strip() for value in row[2].split(',')]
+        child_ids = [child_id.strip() for child_id in row[3].split(',')]
+        type = int(row[4])
+        node = Node(node_id, question, values, child_ids, type)
+        nodes[int(node_id)] = node
     return nodes
 
 
@@ -146,10 +159,10 @@ def traverse_tree(tree, current):
         print("Invalid node. Please check the data.")
 
 
-tree = build_tree('alrite.csv')
-root_node_id = 1  # Replace with the ID of your root node
-tree_json = tree_to_json(tree, root_node_id)
-print(json.dumps(tree_json, indent=4))
+# tree = build_tree('alrite.csv')
+# root_node_id = 1  # Replace with the ID of your root node
+# tree_json = tree_to_json(tree, root_node_id)
+# print(json.dumps(tree_json, indent=4))
 
 if __name__ == '__main__':
     app.run(port=5001)

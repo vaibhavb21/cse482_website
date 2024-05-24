@@ -12,34 +12,55 @@ const App = () => {
     const [message, setMessage] = useState('');
     const [fileInfo, setFileInfo] = useState({ name: '', size: 0 });
 
-    const handleFileChange = (e) => {
+    // const handleFileChange = (e) => {
+    //     const selectedFile = e.target.files[0];
+    //     setFile(selectedFile);
+    //     setFileInfo({
+    //         name: selectedFile.name,
+    //         size: selectedFile.size
+    //     });
+    // };
+
+    const handleFileUpload = (e) => {
         const selectedFile = e.target.files[0];
         setFile(selectedFile);
         setFileInfo({
             name: selectedFile.name,
             size: selectedFile.size
         });
-    };
+        const formData = new FormData();
+        formData.append('file', selectedFile);
 
-    useEffect(() => {
-        axios.get('http://localhost:5001/hello')
-            .then(response => {
-                setMessage(response.data.message);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                setMessage('Failed to load message');
-            });
-
-        axios.get('http://localhost:5001/get_tree')
+        axios.post('http://localhost:5001/upload_file', formData)
         .then(response => {
             setTree(response.data);
         })
         .catch(error => {
-            console.error('Error fetching data:', error);
-            setTree('Failed to load message');
+            console.error('Error uploading file:', error);
         });
-    }, []);
+    };
+
+    console.log(tree);
+    // useEffect(() => {
+    //     axios.get('http://localhost:5001/hello')
+    //         .then(response => {
+    //             setMessage(response.data.message);
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching data:', error);
+    //             setMessage('Failed to load message');
+    //         });
+
+    //     axios.get('http://localhost:5001/get_tree')
+    //     .then(response => {
+    //         setTree(response.data);
+    //     })
+    //     .catch(error => {
+    //         console.error('Error fetching data:', error);
+    //         setTree('Failed to load message');
+    //     });
+    // }, []);
+    
 
     return (
         <Router>
@@ -57,7 +78,7 @@ const App = () => {
                                     <label className="file-input-container">
                                         <FaUpload className="upload-icon" /> {/* Add this line to include the icon */}
                                         Upload a CSV File
-                                        <input type="file" onChange={handleFileChange} accept=".csv" style={{ display: 'none' }} />
+                                        <input type="file" onChange={handleFileUpload} accept=".csv" style={{ display: 'none' }} />
                                     </label>
                                     <div></div>
                                     {file && (
