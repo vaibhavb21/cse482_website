@@ -66,7 +66,9 @@ const App = () => {
         <Router>
             <div className="App">
                 <header className="App-header">
-                    <img src={`${process.env.PUBLIC_URL}/newlogo.png`} alt="Protocol Logo" className="App-logo"/>
+                    <Link to="/">
+                        <img src={`${process.env.PUBLIC_URL}/newlogo.png`} alt="Protocol Logo" className="App-logo"/>
+                    </Link>
                 </header>
                 <main>
                     <Routes>
