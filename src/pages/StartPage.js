@@ -65,35 +65,124 @@ const StartPage = ({ treeProp }) => {
     let operator;
     let value;
 
-    console.log("here1");
-    // Normalize the condition string
+    let number = 0;
+    if(condition.startsWith("[") || condition.startsWith("(")){
+      console.log(condition);
+      let inputValueInt = parseInt(inputValue);
+      if(condition.startsWith("[") && condition.endsWith("]")){
+        condition = condition.slice(1, -1).trim();
+        let parts = condition.split('-').map(s => s.trim());
+        return parts[0] <= inputValueInt && parts[1] >= inputValueInt
+      }
+      if(condition.startsWith("[")&&condition.endsWith(")")){
+        condition = condition.slice(1, -1).trim();
+        let parts = condition.split('-').map(s => s.trim());
+        return parts[0] <= inputValueInt && parts[1] > inputValueInt
+      }
+      if(condition.startsWith("(")&&condition.endsWith("]")){
+        condition = condition.slice(1, -1).trim();
+        let parts = condition.split('-').map(s => s.trim());
+        return parts[0] < inputValueInt && parts[1] >= inputValueInt
+      }
+      if(condition.startsWith("(")&&condition.endsWith(")")){   
+        condition = condition.slice(1, -1).trim();
+        let parts = condition.split('-').map(s => s.trim());
+        return parts[0] < inputValueInt && parts[1] > inputValueInt
+      }
+      console.log("getPast");
+    }
     if (condition.includes("<=")) {
-      [value, operator] = condition.split("<=").map(s => s.trim()).reverse();
-      operator = "<=";
+      if (condition.startsWith("<=")) {
+        operator = "<=";
+        value = condition.replace("<=", "").trim();
+      } else {
+        operator = "<=";
+        value = condition.replace("<=", "").trim();
+        number = 1;
+      }
     } else if (condition.includes("=<")) {
-      [operator, value] = condition.split("=<").map(s => s.trim());
-      operator = "<=";
+      if (condition.startsWith("=<")) {
+        operator = "<=";
+        value = condition.replace("=<", "").trim();
+      } else {
+        operator = "<=";
+        value = condition.replace("=<", "").trim();
+        number = 1;
+      }
     } else if (condition.includes(">=")) {
-      [value, operator] = condition.split(">=").map(s => s.trim()).reverse();
-      operator = ">=";
+      if (condition.startsWith(">=")) {
+        operator = ">=";
+        value = condition.replace(">=", "").trim();
+      } else {
+        operator = ">=";
+        value = condition.replace(">=", "").trim();
+        number = 1;
+      }
     } else if (condition.includes("=>")) {
-      [operator, value] = condition.split("=>").map(s => s.trim());
-      operator = ">=";
+      if (condition.startsWith("=>")) {
+        operator = ">=";
+        value = condition.replace("=>", "").trim();
+      } else {
+        operator = ">=";
+        value = condition.replace("=>", "").trim();
+        number = 1;
+      }
     } else if (condition.includes("<")) {
-      [value, operator] = condition.split("<").map(s => s.trim()).reverse();
-      operator = "<";
+      if (condition.startsWith("<")) {
+        operator = "<";
+        value = condition.replace("<", "").trim();
+      } else {
+        operator = "<";
+        value = condition.replace("<", "").trim();
+        number = 1;
+      }
     } else if (condition.includes(">")) {
-      [value, operator] = condition.split(">").map(s => s.trim()).reverse();
-      operator = ">";
+      if (condition.startsWith(">")) {
+        operator = ">";
+        value = condition.replace(">", "").trim();
+      } else {
+        operator = ">";
+        value = condition.replace(">", "").trim();
+        number = 1;
+      }
     } else if (condition.includes("=")) {
-      [value, operator] = condition.split("=").map(s => s.trim()).reverse();
       operator = "==";
+      value = condition.replace("=", "").trim();
     } else if (condition.includes("!=")) {
-      [value, operator] = condition.split("!=").map(s => s.trim()).reverse();
       operator = "!=";
+      value = condition.replace("!=", "").trim();
     } else {
       throw new Error("Unsupported condition format");
     }
+    // Normalize the condition string
+    
+    // if (condition.includes("<=")) {
+    //   [value, operator] = condition.split("<=").map(s => s.trim()).reverse();
+    //   operator = "<=";
+    // } else if (condition.includes("=<")) {
+    //   [operator, value] = condition.split("=<").map(s => s.trim());
+    //   operator = "<=";
+    // } else if (condition.includes(">=")) {
+    //   [value, operator] = condition.split(">=").map(s => s.trim()).reverse();
+    //   operator = ">=";
+    // } else if (condition.includes("=>")) {
+    //   [operator, value] = condition.split("=>").map(s => s.trim());
+    //   operator = ">=";
+    // } else if (condition.includes("<")) {
+    //   [value, operator] = condition.split("<").map(s => s.trim()).reverse();
+    //   operator = "<";
+    // } else if (condition.includes(">")) {
+    //   [value, operator] = condition.split(">").map(s => s.trim()).reverse();
+    //   operator = ">";
+    // } else if (condition.includes("=")) {
+    //   [value, operator] = condition.split("=").map(s => s.trim()).reverse();
+    //   operator = "==";
+    // } else if (condition.includes("!=")) {
+    //   [value, operator] = condition.split("!=").map(s => s.trim()).reverse();
+    //   operator = "!=";
+    // } else {
+    //   throw new Error("Unsupported condition format");
+    // }
     console.log("surya is the greatest");
     value = parseInt(value, 10);
     let inputValueInt = parseInt(inputValue);
@@ -102,13 +191,29 @@ const StartPage = ({ treeProp }) => {
     // Check the condition
     switch (operator) {
       case "<=":
-        return inputValueInt <= value;
+        if(number == 0){
+          return inputValueInt <= value;
+        }else{
+          return value <= inputValueInt;
+        }
       case ">=":
-        return inputValueInt >= value;
+        if(number == 0){
+          return inputValueInt >= value;
+        }else{
+          return value >= inputValueInt;
+        }
       case "<":
-        return inputValueInt < value;
+        if(number == 0) {
+          return inputValueInt < value;
+        } else {
+          return value < inputValueInt;
+        }
       case ">":
-        return inputValueInt > value;
+        if(number == 0) {
+          return inputValueInt > value;
+        } else {
+          return value > inputValueInt;
+        }
       case "==":
         return inputValueInt == value;
       case "!=":
@@ -208,6 +313,7 @@ const StartPage = ({ treeProp }) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      
       {currentNode.children.length > 0 ? (
         <>
           <h2>{currentNode.question}</h2>
