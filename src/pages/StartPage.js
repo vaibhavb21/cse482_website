@@ -6,11 +6,17 @@ const StartPage = ({ treeProp }) => {
   const [userInput, setUserInput] = useState('');
   const [dropdownSelected, setDropdownSelected] = useState(false); // Track if dropdown option is selected
   const [nodeHistory, setNodeHistory] = useState([]);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setInputValue(e.target.value); // Update temporary input state
   };
   const handleNext = () => {
+    setError('')
+    if (inputValue.trim() === '') {
+      setError('Please enter input');
+      return;
+    }
     setUserInput(inputValue); // Set the user input for processing
     if (!currentNode || !currentNode.children) {
       return; // End of navigation if no children
@@ -22,6 +28,10 @@ const StartPage = ({ treeProp }) => {
     } else {
       const values = currentNode.values;
       if (currentNode.type == 3) {
+        if (isNaN(inputValue)) {
+          setError('Please enter numeric input');
+          return;
+        }
         // numerical comparator logic
         // ex: inputValue<30, 30 <= inputValue <= 80, inputValue>80
         // inputValue = 60
@@ -304,6 +314,7 @@ const StartPage = ({ treeProp }) => {
       {currentNode.children.length > 0 ? (
         <>
           <h2>{currentNode.question}</h2>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
           {currentNode.type === 0 ? (
             <div style={{ display: 'flex', gap: '20px' }}>
               <button
