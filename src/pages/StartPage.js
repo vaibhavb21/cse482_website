@@ -5,6 +5,7 @@ const StartPage = ({ treeProp }) => {
   const [inputValue, setInputValue] = useState(''); // Store input value temporarily
   const [userInput, setUserInput] = useState('');
   const [dropdownSelected, setDropdownSelected] = useState(false); // Track if dropdown option is selected
+  const [nodeHistory, setNodeHistory] = useState([]);
 
   const handleChange = (e) => {
     setInputValue(e.target.value); // Update temporary input state
@@ -36,7 +37,8 @@ const StartPage = ({ treeProp }) => {
         }
         if (index !== -1 && index < currentNode.children.length) {
           nextNode = currentNode.children[index];
-        }
+        } 
+
       } else {
         // regular index logic
           const index = values.indexOf(inputValue);
@@ -47,7 +49,7 @@ const StartPage = ({ treeProp }) => {
           }
       }
   }
-
+    setNodeHistory([...nodeHistory, currentNode]);
     setCurrentNode(nextNode);
     setInputValue(''); // Reset the temporary input for the next input
     setDropdownSelected(false); // Reset dropdown selected state
@@ -154,35 +156,6 @@ const StartPage = ({ treeProp }) => {
     } else {
       throw new Error("Unsupported condition format");
     }
-    // Normalize the condition string
-    
-    // if (condition.includes("<=")) {
-    //   [value, operator] = condition.split("<=").map(s => s.trim()).reverse();
-    //   operator = "<=";
-    // } else if (condition.includes("=<")) {
-    //   [operator, value] = condition.split("=<").map(s => s.trim());
-    //   operator = "<=";
-    // } else if (condition.includes(">=")) {
-    //   [value, operator] = condition.split(">=").map(s => s.trim()).reverse();
-    //   operator = ">=";
-    // } else if (condition.includes("=>")) {
-    //   [operator, value] = condition.split("=>").map(s => s.trim());
-    //   operator = ">=";
-    // } else if (condition.includes("<")) {
-    //   [value, operator] = condition.split("<").map(s => s.trim()).reverse();
-    //   operator = "<";
-    // } else if (condition.includes(">")) {
-    //   [value, operator] = condition.split(">").map(s => s.trim()).reverse();
-    //   operator = ">";
-    // } else if (condition.includes("=")) {
-    //   [value, operator] = condition.split("=").map(s => s.trim()).reverse();
-    //   operator = "==";
-    // } else if (condition.includes("!=")) {
-    //   [value, operator] = condition.split("!=").map(s => s.trim()).reverse();
-    //   operator = "!=";
-    // } else {
-    //   throw new Error("Unsupported condition format");
-    // }
     console.log("surya is the greatest");
     value = parseInt(value, 10);
     let inputValueInt = parseInt(inputValue);
@@ -242,6 +215,15 @@ const StartPage = ({ treeProp }) => {
     }
     setInputValue(''); // Reset the temporary input for the next input
     setCurrentNode(nextNode);
+
+  };
+  
+  const handleBack = () => {
+    if (nodeHistory.length > 0) {
+      const previousNode = nodeHistory[nodeHistory.length - 1];
+      setNodeHistory(nodeHistory.slice(0, -1)); // Pop the last node from history stack
+      setCurrentNode(previousNode);
+    }
 
   };
 
@@ -312,8 +294,13 @@ const StartPage = ({ treeProp }) => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
+      <button
+ 		      onClick={handleBack}
+ 	        style={{ position: 'absolute', top: '10px', right: '10px', padding: '5px 10px', fontSize: '14px' }}
+ 	      >
+ 		        Back
+ 	    </button>
       {currentNode.children.length > 0 ? (
         <>
           <h2>{currentNode.question}</h2>
