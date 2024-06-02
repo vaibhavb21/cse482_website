@@ -277,8 +277,26 @@ const StartPage = ({ treeProp }) => {
   };
 
   const buttonHoverStyle = {
-    backgroundColor: '#008f73',
+    backgroundColor: '#046d74',
   };
+
+
+  const backButtonStyle = {
+  padding: '10px 20px',
+  margin: '10px',
+  backgroundColor: 'transparent',
+  color: '#07bac7',
+  border: '2px solid #07bac7',
+  borderRadius: '5px',
+  cursor: 'pointer',
+  fontSize: '16px',
+  transition: 'background-color 0.3s, color 0.3s',
+};
+
+const backButtonHoverStyle = {
+  backgroundColor: '#07bac7',
+  color: '#fff',
+};
 
   const inputStyle = {
     margin: '10px',
@@ -305,12 +323,6 @@ const StartPage = ({ treeProp }) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
-      <button
- 		      onClick={handleBack}
- 	        style={{ position: 'absolute', top: '10px', right: '10px', padding: '5px 10px', fontSize: '14px' }}
- 	      >
- 		        Back
- 	    </button>
       {currentNode.children.length > 0 ? (
         <>
           <h2>{currentNode.question}</h2>
@@ -362,30 +374,45 @@ const StartPage = ({ treeProp }) => {
               )}
             </>
           ) : (
-            <>
-              <input
-                type="text"
-                value={inputValue}
-                onChange={handleChange}
-                placeholder="Enter your answer"
-                style={inputStyle}
-              />
-              <button
-                style={buttonStyle}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
-                onClick={handleNext}
-              >
-                Next
-              </button>
-            </>
+              <>
+                <input
+                    type="text"
+                    value={inputValue}
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    style={inputStyle}
+                />
+                <button
+                    style={buttonStyle}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
+                    onClick={handleNext}
+                >
+                  Next
+                </button>
+
+                <button
+                    onClick={handleBack}
+                    style={backButtonStyle}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = backButtonHoverStyle.backgroundColor;
+                      e.currentTarget.style.color = backButtonHoverStyle.color;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = backButtonStyle.backgroundColor;
+                      e.currentTarget.style.color = backButtonStyle.color;
+                    }}
+                >
+                  Back
+                </button>
+              </>
           )}
         </>
       ) : (
-        <div>
-          <h1>Recommended Diagnosis:</h1>
-          <h2>{currentNode.question}</h2>
-        </div>
+          <div>
+            <h1>Recommended Diagnosis:</h1>
+            <h2>{currentNode.question}</h2>
+          </div>
       )}
     </div>
   );
