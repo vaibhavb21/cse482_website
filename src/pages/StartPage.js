@@ -80,7 +80,7 @@ const StartPage = ({ treeProp }) => {
     let number = 0;
     if(condition.startsWith("[") || condition.startsWith("(")){
       console.log(condition);
-      let inputValueInt = parseInt(inputValue);
+      let inputValueInt = parseFloat(inputValue);
       if(condition.startsWith("[") && condition.endsWith("]")){
         condition = condition.slice(1, -1).trim();
         let parts = condition.split('-').map(s => s.trim());
@@ -167,8 +167,8 @@ const StartPage = ({ treeProp }) => {
       throw new Error("Unsupported condition format");
     }
     console.log("surya is the greatest");
-    value = parseInt(value, 10);
-    let inputValueInt = parseInt(inputValue);
+    value = parseFloat(value, 10);
+    let inputValueInt = parseFloat(inputValue);
     console.log("Here 3");
 
     // Check the condition
@@ -223,6 +223,7 @@ const StartPage = ({ treeProp }) => {
         nextNode = currentNode.children[index];
       }
     }
+    setNodeHistory([...nodeHistory, currentNode]);
     setInputValue(''); // Reset the temporary input for the next input
     setCurrentNode(nextNode);
 
@@ -254,11 +255,13 @@ const StartPage = ({ treeProp }) => {
         nextNode = currentNode.children[index];
       }
     }
+    setNodeHistory([...nodeHistory, currentNode]);
     setInputValue(''); // Reset the temporary input for the next input
     setCurrentNode(nextNode);
   };
 
   const handleDropdownChange = (e) => {
+    setNodeHistory([...nodeHistory, currentNode]);
     setInputValue(e.target.value);
     setUserInput(e.target.value);
     setDropdownSelected(true); // Mark that an option has been selected
