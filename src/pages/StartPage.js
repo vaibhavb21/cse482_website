@@ -325,99 +325,98 @@ const backButtonHoverStyle = {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
-      {currentNode.children.length > 0 ? (
-        <>
-          <h2>{currentNode.question}</h2>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          {currentNode.type === 0 ? (
-            <div style={{ display: 'flex', gap: '20px' }}>
-              <button
-                style={buttonStyle}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
-                onClick={handleYesClick}
-              >
-                Yes
-              </button>
-              <button
-                style={buttonStyle}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
-                onClick={handleNoClick}
-              >
-                No
-              </button>
-            </div>
-          ) : currentNode.type === 1 ? (
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative'}}>
+        {currentNode.children.length > 0 ? (
             <>
-              <select
-                style={dropdownStyle}
-                onChange={handleDropdownChange}
-                value={inputValue}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = hoverStyle.backgroundColor}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = inputStyle.backgroundColor}
-              >
-                <option value="" disabled>Select an option</option>
-                {currentNode.values.map((value, index) => (
-                  <option key={index} value={value} style={{ color: '#000' }}>
-                    {value}
-                  </option>
-                ))}
-              </select>
-              {dropdownSelected && (
-                <button
-                  style={buttonStyle}
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
-                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
-                  onClick={handleNext}
-                >
-                  Next
-                </button>
+              <h2>{currentNode.question}</h2>
+              {error && <p style={{ color: 'red' }}>{error}</p>}
+              {currentNode.type === 0 ? (
+                  <div style={{display: 'flex', gap: '20px'}}>
+                    <button
+                        style={buttonStyle}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
+                        onClick={handleYesClick}
+                    >
+                      Yes
+                    </button>
+                    <button
+                        style={buttonStyle}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
+                        onClick={handleNoClick}
+                    >
+                      No
+                    </button>
+                  </div>
+              ) : currentNode.type === 1 ? (
+                  <>
+                    <select
+                        style={dropdownStyle}
+                        onChange={handleDropdownChange}
+                        value={inputValue}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = hoverStyle.backgroundColor}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = inputStyle.backgroundColor}
+                    >
+                      <option value="" disabled>Select an option</option>
+                      {currentNode.values.map((value, index) => (
+                          <option key={index} value={value} style={{color: '#000'}}>
+                            {value}
+                          </option>
+                      ))}
+                    </select>
+                    {dropdownSelected && (
+                        <button
+                            style={buttonStyle}
+                            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
+                            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
+                            onClick={handleNext}
+                        >
+                          Next
+                        </button>
+                    )}
+                  </>
+              ) : (
+                  <>
+                    <input
+                        type="text"
+                        value={inputValue}
+                        onChange={handleChange}
+                        placeholder="Enter your answer"
+                        style={inputStyle}
+                    />
+                    <button
+                        style={buttonStyle}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
+                        onClick={handleNext}
+                    >
+                      Next
+                    </button>
+                  </>
               )}
             </>
-          ) : (
-              <>
-                <input
-                    type="text"
-                    value={inputValue}
-                    onChange={handleChange}
-                    placeholder="Enter your answer"
-                    style={inputStyle}
-                />
-                <button
-                    style={buttonStyle}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
-                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
-                    onClick={handleNext}
-                >
-                  Next
-                </button>
-
-                <button
-                    onClick={handleBack}
-                    style={backButtonStyle}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = backButtonHoverStyle.backgroundColor;
-                      e.currentTarget.style.color = backButtonHoverStyle.color;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = backButtonStyle.backgroundColor;
-                      e.currentTarget.style.color = backButtonStyle.color;
-                    }}
-                >
-                  Back
-                </button>
-              </>
-          )}
-        </>
-      ) : (
-          <div>
-            <h1>Recommended Diagnosis:</h1>
-            <h2>{currentNode.question}</h2>
-          </div>
-      )}
-    </div>
+        ) : (
+            <div>
+              <h1>Recommended Diagnosis:</h1>
+              <h2>{currentNode.question}</h2>
+            </div>
+        )}
+        <button
+            onClick={handleBack}
+            style={backButtonStyle}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = backButtonHoverStyle.backgroundColor;
+              e.currentTarget.style.color = backButtonHoverStyle.color;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = backButtonStyle.backgroundColor;
+              e.currentTarget.style.color = backButtonStyle.color;
+            }}
+        >
+          Back
+        </button>
+      </div>
   );
 };
 
