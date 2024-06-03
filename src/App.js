@@ -4,7 +4,7 @@ import './App.css';
 import axios from "axios";
 import StartPage from "./pages/StartPage";
 import Tutorial from './pages/TutorialPage';
-import { FaUpload } from 'react-icons/fa';
+import { FaUpload, FaPlay } from 'react-icons/fa';
 
 const App = () => {
     const [file, setFile] = useState(null);
@@ -72,16 +72,19 @@ const App = () => {
                                                 <p><strong>File Name:</strong> {fileInfo.name}</p>
                                                 <p><strong>File Size:</strong> {fileInfo.size} bytes</p>
                                             </div>
-                                            <button>
-                                                <Link to="/StartPage" className="no-underline-link">Begin Questionnaire</Link>
+                                            <button style={{
+                                                fontFamily: 'Figtree, sans-serif',
+                                            }}>
+                                                <FaPlay style={{marginRight: '8px', verticalAlign: 'middle'}} />
+                                                <Link to="/StartPage" className="no-underline-link" style={{ verticalAlign: 'middle' }}>Begin Questionnaire</Link>
                                             </button>
                                         </>
                                     )}
                                 </div>
                             }
                         />
-                        <Route path="/StartPage" element={<StartPage treeProp={tree} />} />
-                        <Route path="/tutorial" element={<Tutorial />} />
+                        <Route path="/StartPage" element={<StartPage treeProp={tree}/>}/>
+                        <Route path="/tutorial" element={<Tutorial/>}/>
                     </Routes>
                 </main>
             </div>

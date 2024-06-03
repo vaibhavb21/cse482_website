@@ -14,7 +14,7 @@ const StartPage = ({ treeProp }) => {
   const handleNext = () => {
     setError('')
     if (inputValue.trim() === '') {
-      setError('Please enter input');
+      setError('Please enter a valid input.');
       return;
     }
     setUserInput(inputValue); // Set the user input for processing
@@ -29,7 +29,7 @@ const StartPage = ({ treeProp }) => {
       const values = currentNode.values;
       if (currentNode.type == 3) {
         if (isNaN(inputValue)) {
-          setError('Please enter numeric input');
+          setError('Please enter a valid numeric input.');
           return;
         }
         // numerical comparator logic
@@ -277,6 +277,7 @@ const StartPage = ({ treeProp }) => {
     cursor: 'pointer',
     fontSize: '16px',
     transition: 'background-color 0.3s',
+    fontFamily: "Figtree",
   };
 
   const buttonHoverStyle = {
@@ -294,6 +295,7 @@ const StartPage = ({ treeProp }) => {
   cursor: 'pointer',
   fontSize: '16px',
   transition: 'background-color 0.3s, color 0.3s',
+  fontFamily: "Figtree",
 };
 
 const backButtonHoverStyle = {
@@ -308,6 +310,7 @@ const backButtonHoverStyle = {
     border: '1px solid #ccc',
     fontSize: '16px',
     width: '100%', // Ensure the input and dropdown take the full width of their container
+    fontFamily: "Figtree",
   };
 
   const dropdownStyle = {

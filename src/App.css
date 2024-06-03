@@ -1,9 +1,14 @@
 /* App.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital@0;1&display=swap');
+
 body, html {
   height: 100%;
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Figtree", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
   background-color: #f7f7f5;
 }
 
@@ -110,7 +115,7 @@ h1, h2 {
   margin: 20px 0;
   padding: 10px 0;
   text-align: center;
-  font-family: 'Inter', sans-serif;
+  font-family: "Figtree", sans-serif;
 }
 
 h1 {
@@ -176,7 +181,7 @@ h2 {
 .tutorial-link {
   display: block;
   margin-bottom: 90px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Figtree", sans-serif;
 }
 
 .App-logo {
