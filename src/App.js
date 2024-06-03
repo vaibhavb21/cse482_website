@@ -9,17 +9,8 @@ import { FaUpload } from 'react-icons/fa';
 const App = () => {
     const [file, setFile] = useState(null);
     const [tree, setTree] = useState(null);
-    const [message, setMessage] = useState('');
     const [fileInfo, setFileInfo] = useState({ name: '', size: 0 });
-
-    // const handleFileChange = (e) => {
-    //     const selectedFile = e.target.files[0];
-    //     setFile(selectedFile);
-    //     setFileInfo({
-    //         name: selectedFile.name,
-    //         size: selectedFile.size
-    //     });
-    // };
+    const [darkMode, setDarkMode] = useState(false);
 
     const handleFileUpload = (e) => {
         const selectedFile = e.target.files[0];
@@ -40,35 +31,27 @@ const App = () => {
         });
     };
 
-    console.log(tree);
-    // useEffect(() => {
-    //     axios.get('http://localhost:5001/hello')
-    //         .then(response => {
-    //             setMessage(response.data.message);
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching data:', error);
-    //             setMessage('Failed to load message');
-    //         });
-
-    //     axios.get('http://localhost:5001/get_tree')
-    //     .then(response => {
-    //         setTree(response.data);
-    //     })
-    //     .catch(error => {
-    //         console.error('Error fetching data:', error);
-    //         setTree('Failed to load message');
-    //     });
-    // }, []);
-    
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+    };
 
     return (
         <Router>
-            <div className="App">
+            <div className={`App ${darkMode ? 'dark-mode' : ''}`}>
                 <header className="App-header">
-                    <Link to="/">
-                        <img src={`${process.env.PUBLIC_URL}/newlogo.png`} alt="Protocol Logo" className="App-logo"/>
+                    <Link to="/" className="logo-container">
+                        <img
+                            src={darkMode ? `${process.env.PUBLIC_URL}/darkModeLogo.png` : `${process.env.PUBLIC_URL}/lightModeLogo.png`}
+                            alt="Protocol Logo"
+                            className="App-logo"
+                        />
                     </Link>
+                    <div className="dark-mode-toggle">
+                        <label className="switch">
+                            <input type="checkbox" checked={darkMode} onChange={toggleDarkMode} />
+                            <span className="slider round"></span>
+                        </label>
+                    </div>
                 </header>
                 <main>
                     <Routes>
@@ -90,7 +73,7 @@ const App = () => {
                                                 <p><strong>File Size:</strong> {fileInfo.size} bytes</p>
                                             </div>
                                             <button>
-                                                <Link to="/StartPage">Start Page</Link>
+                                                <Link to="/StartPage" className="no-underline-link">Begin Questionnaire</Link>
                                             </button>
                                         </>
                                     )}

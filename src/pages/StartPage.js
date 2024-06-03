@@ -37,7 +37,7 @@ const StartPage = ({ treeProp }) => {
         }
         if (index !== -1 && index < currentNode.children.length) {
           nextNode = currentNode.children[index];
-        } 
+        }
 
       } else {
         // regular index logic
@@ -48,7 +48,7 @@ const StartPage = ({ treeProp }) => {
             nextNode = currentNode.children[index];
           }
       }
-  }
+    }
     setNodeHistory([...nodeHistory, currentNode]);
     setCurrentNode(nextNode);
     setInputValue(''); // Reset the temporary input for the next input
@@ -156,7 +156,6 @@ const StartPage = ({ treeProp }) => {
     } else {
       throw new Error("Unsupported condition format");
     }
-    console.log("surya is the greatest");
     value = parseInt(value, 10);
     let inputValueInt = parseInt(inputValue);
     console.log("Here 3");
@@ -195,7 +194,7 @@ const StartPage = ({ treeProp }) => {
         throw new Error("Unsupported operator");
     }
   };
-  
+
   const handleYesClick = () => {
     setInputValue('yes');
     setUserInput('yes'); // Set the user input for processing
@@ -217,7 +216,7 @@ const StartPage = ({ treeProp }) => {
     setCurrentNode(nextNode);
 
   };
-  
+
   const handleBack = () => {
     if (nodeHistory.length > 0) {
       const previousNode = nodeHistory[nodeHistory.length - 1];
