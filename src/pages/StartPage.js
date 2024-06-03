@@ -6,11 +6,17 @@ const StartPage = ({ treeProp }) => {
   const [userInput, setUserInput] = useState('');
   const [dropdownSelected, setDropdownSelected] = useState(false); // Track if dropdown option is selected
   const [nodeHistory, setNodeHistory] = useState([]);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setInputValue(e.target.value); // Update temporary input state
   };
   const handleNext = () => {
+    setError('')
+    if (inputValue.trim() === '') {
+      setError('Please enter input');
+      return;
+    }
     setUserInput(inputValue); // Set the user input for processing
     if (!currentNode || !currentNode.children) {
       return; // End of navigation if no children
@@ -22,6 +28,10 @@ const StartPage = ({ treeProp }) => {
     } else {
       const values = currentNode.values;
       if (currentNode.type == 3) {
+        if (isNaN(inputValue)) {
+          setError('Please enter numeric input');
+          return;
+        }
         // numerical comparator logic
         // ex: inputValue<30, 30 <= inputValue <= 80, inputValue>80
         // inputValue = 60
@@ -70,7 +80,7 @@ const StartPage = ({ treeProp }) => {
     let number = 0;
     if(condition.startsWith("[") || condition.startsWith("(")){
       console.log(condition);
-      let inputValueInt = parseInt(inputValue);
+      let inputValueInt = parseFloat(inputValue);
       if(condition.startsWith("[") && condition.endsWith("]")){
         condition = condition.slice(1, -1).trim();
         let parts = condition.split('-').map(s => s.trim());
@@ -156,8 +166,9 @@ const StartPage = ({ treeProp }) => {
     } else {
       throw new Error("Unsupported condition format");
     }
-    value = parseInt(value, 10);
-    let inputValueInt = parseInt(inputValue);
+    console.log("surya is the greatest");
+    value = parseFloat(value, 10);
+    let inputValueInt = parseFloat(inputValue);
     console.log("Here 3");
 
     // Check the condition
@@ -212,6 +223,7 @@ const StartPage = ({ treeProp }) => {
         nextNode = currentNode.children[index];
       }
     }
+    setNodeHistory([...nodeHistory, currentNode]);
     setInputValue(''); // Reset the temporary input for the next input
     setCurrentNode(nextNode);
 
@@ -243,11 +255,13 @@ const StartPage = ({ treeProp }) => {
         nextNode = currentNode.children[index];
       }
     }
+    setNodeHistory([...nodeHistory, currentNode]);
     setInputValue(''); // Reset the temporary input for the next input
     setCurrentNode(nextNode);
   };
 
   const handleDropdownChange = (e) => {
+    setNodeHistory([...nodeHistory, currentNode]);
     setInputValue(e.target.value);
     setUserInput(e.target.value);
     setDropdownSelected(true); // Mark that an option has been selected
@@ -315,6 +329,7 @@ const backButtonHoverStyle = {
         {currentNode.children.length > 0 ? (
             <>
               <h2>{currentNode.question}</h2>
+              {error && <p style={{ color: 'red' }}>{error}</p>}
               {currentNode.type === 0 ? (
                   <div style={{display: 'flex', gap: '20px'}}>
                     <button
