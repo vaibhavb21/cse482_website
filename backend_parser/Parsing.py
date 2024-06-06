@@ -9,7 +9,6 @@ CORS(app)  # Necessary to avoid issues with CORS on browsers
 
 references = {}
 
-
 @dataclass
 class Node:
     id: int
@@ -63,18 +62,16 @@ def upload_file():
     file_contents = file.stream.read().decode('utf-8')
     csv_data = csv.reader(file_contents.splitlines())
     print(csv_data)
-    # Process the CSV data here
     tree = build_tree(csv_data)
-    root_node_id = 1  # Replace with the ID of your root node
+    root_node_id = 1
     tree_json = tree_to_json(tree, root_node_id)
     return jsonify(tree_json)
 
 
 @app.route('/get_tree', methods=['GET'])
-# @app.route('/upload_file', methods=['POST'])
 def get_tree():
     tree = build_tree('alrite.csv')
-    root_node_id = 1  # Replace with the ID of your root node
+    root_node_id = 1
     tree_json = tree_to_json(tree, root_node_id)
     print(json.dumps(tree_json, indent=4))
     return jsonify(tree_json)
@@ -158,11 +155,6 @@ def traverse_tree(tree, current):
     else:
         print("Invalid node. Please check the data.")
 
-
-# tree = build_tree('alrite.csv')
-# root_node_id = 1  # Replace with the ID of your root node
-# tree_json = tree_to_json(tree, root_node_id)
-# print(json.dumps(tree_json, indent=4))
 
 if __name__ == '__main__':
     app.run(port=5001)

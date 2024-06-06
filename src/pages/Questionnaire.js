@@ -32,12 +32,6 @@ const Questionnaire = ({ treeProp }) => {
           setError('Please enter a valid numeric input.');
           return;
         }
-        // numerical comparator logic
-        // ex: inputValue<30, 30 <= inputValue <= 80, inputValue>80
-        // inputValue = 60
-        // values: '<30', '30-80', '>80'
-        // stretch: add in >= and <=, 
-        // edge: if they give # that's outside of range, possible error handling
         let index = 0;
         for(index = 0; index < values.length; index++){
           const value = values[index];
@@ -66,14 +60,6 @@ const Questionnaire = ({ treeProp }) => {
   };
 
   const parseAndEvaluate = (condition, inputValue) => {
-    // values: '<=30', '30-=-80', '>80, 30<='
-    // reserve: <=, <, =, >, >=
-    // <=, >=, 
-    // string operator
-    // string digit
-    // handle every single case
-    // <= 30, 30 >=, 30 =-= 80,
-    // handle this case: <30, >=30    
     let operator;
     let value;
 
@@ -315,7 +301,7 @@ const backButtonHoverStyle = {
 
   const dropdownStyle = {
     ...inputStyle,
-    width: 'calc(100% + 20px)', // Make the dropdown a bit wider
+    width: 'calc(100% + 20px)',
     appearance: 'none', // Hide default dropdown arrow
     WebkitAppearance: 'none', // Hide default dropdown arrow in Safari
     MozAppearance: 'none', // Hide default dropdown arrow in Firefox
