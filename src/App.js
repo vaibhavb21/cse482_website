@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import './App.css';
 import axios from "axios";
-import StartPage from "./pages/StartPage";
+import Questionnaire from "./pages/Questionnaire";
 import { FaUpload, FaPlay } from 'react-icons/fa';
 
 const App = () => {
@@ -75,14 +75,14 @@ const App = () => {
                                                 fontFamily: 'Figtree, sans-serif',
                                             }}>
                                                 <FaPlay style={{marginRight: '8px', verticalAlign: 'middle'}} />
-                                                <Link to="/StartPage" className="no-underline-link" style={{ verticalAlign: 'middle' }}>Begin Questionnaire</Link>
+                                                <Link to="/Questionnaire" className="no-underline-link" style={{ verticalAlign: 'middle' }}>Begin Questionnaire</Link>
                                             </button>
                                         </>
                                     )}
                                 </div>
                             }
                         />
-                        <Route path="/StartPage" element={<StartPage treeProp={tree}/>}/>
+                        <Route path="/Questionnaire" element={<Questionnaire treeProp={tree}/>}/>
                     </Routes>
                 </main>
             </div>

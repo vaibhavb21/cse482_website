@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const StartPage = ({ treeProp }) => {
+const Questionnaire = ({ treeProp }) => {
   const [currentNode, setCurrentNode] = useState(treeProp);
   const [inputValue, setInputValue] = useState(''); // Store input value temporarily
   const [userInput, setUserInput] = useState('');
@@ -423,4 +423,4 @@ const backButtonHoverStyle = {
   );
 };
 
-export default StartPage;
+export default Questionnaire;
