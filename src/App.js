@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import './App.css';
 import axios from "axios";
 import StartPage from "./pages/StartPage";
-import Tutorial from './pages/TutorialPage';
 import { FaUpload, FaPlay } from 'react-icons/fa';
 
 const App = () => {
@@ -84,7 +83,6 @@ const App = () => {
                             }
                         />
                         <Route path="/StartPage" element={<StartPage treeProp={tree}/>}/>
-                        <Route path="/tutorial" element={<Tutorial/>}/>
                     </Routes>
                 </main>
             </div>
