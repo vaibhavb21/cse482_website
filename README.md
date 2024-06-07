@@ -1,71 +1,54 @@
-# Getting Started with Create React App
+# Protocol App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![LandingPage.png](public/ReadMe_images/LandingPage.png)
 
-## Available Scripts
+## Launching the web app:
 
-In the project directory, you can run:
+After cloning the repository, navigate to the backend_parser folder from the main project directory:
+
+### `cd backend_parser`
+
+Then run:
+
+### `Python Parsing.py`
+
+This starts the backend Python script. Note: we recommend running Procotol using Python 3.9. To launch the frontend web app, open a new terminal and run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open [http://localhost:3000](http://localhost:3000) to view Protocol in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Uploading a Decision Tree CSV:
 
-### `npm test`
+Once the Protocol app has been launched, you can upload a decision tree in the form of a CSV file. Two example CSVs are provided in the repository for your reference: 
+* Alrite_Example_Decision_Tree.csv 
+* MUAC_Example_Decision_Tree.csv 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You may upload one of these CSVs that are already correctly formatted, or create your own.
 
-### `npm run build`
+![UploadedCSV.png](public/ReadMe_images/UploadedCSV.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Decision Tree Schema:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+If you'd like to create your own decision tree, you must follow a specific schema for the CSV file. We recommend first creating the file in Microsoft Excel, and the exporting to CSV format after.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![AlriteCSV.png](public/ReadMe_images/AlriteCSV.png)
 
-### `npm run eject`
+Our schema (column headers) for the Excel file is as follows: 'Node, Question, Values, Child Nodes, Type'. This is also shown in the table above. Each node (which is a question/diagnosis, or a page in the questionnaire) possesses all 5 pieces of information that make up a page in our questionnaire. First, the 'Node' field is a number that is just a unique identifier for that node. The 'Question' field is the question (or diagnosis) that will display on the page for that node. The 'Values' field is the different answers for the question that result in branches that will lead to other nodes. This field is very important and corresponds in respective order to the 'Child Nodes' field, which specifies which child node each answer maps to. For example, if we have the field 'Values' as 'yes, no', and 'Child Nodes' as '4,5', this means the answer 'yes' corresponds to Node 4 and the answer 'no' corresponds to Node 5. Finally, we have our 'Type' field, which is how allow the user to specify what type of question they would like. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| Type | Definition          |
+|------|----------------------|
+| 0    | Yes / No Buttons     |
+| 1    | Dropdown             |
+| 2    | Text Input           |
+| 3    | Numeric Input        |
+| 4    | Diagnosis Screen     |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+As shown in table above, we have 5 different types of nodes. Type 0 is a `yes/no' button, which is just 2 buttons that allow you to select yes or no. Type 1 is a dropdown, which allows you to select a choice from a given list of choices in a dropdown format. Type 2 is text input, which allows you to input any text you would like into a text box. Type 3 is numeric input, which allows you to specify number ranges for the answer to be in. For example, in the table below, we can see the ranges in the 'Values' field of '<11.5,[11.5-12.4], >12.4'. This means if any value less than 11.5 is put in, the application will go to Node 2, any value between 11.5 and 12.4 INCLUSIVE goes to Node 3, and any value greater than 12.4 goes to Node 4.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![MUACcsv.png](public/ReadMe_images/MUACcsv.png)
 
-## Learn More
+## Acknowledgements:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# cse482_website
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

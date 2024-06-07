@@ -1,0 +1,5 @@
+﻿Node,Question,Values,Child Nodes,Type
+1,MUAC,"<11.5, [11.5-12.4], >12.4","2,3,4",3
+2,Severe Acute Malnutrition,X,X,4
+3,Mild Acute Malnutrition,X,X,4
+4,No Malnutrition,X,X,4

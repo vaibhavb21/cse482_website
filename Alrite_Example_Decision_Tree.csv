@@ -1,0 +1,19 @@
+﻿Node,Question,Values,Child Nodes,Type
+1,Patient's initials,X,2,2
+2,"Patient's sex, age, weight, MUAC",X,3,2
+3,WHO Danger signs,"yes,no","4,5",0
+4,Severe pneumonia or severe disease,x,x,4
+5,Cough or difficulty breathing?,"yes,no","7,6",0
+6,No signs of pneumonia or wheezing illness,X,X,4
+7,How many days of symptoms?,X,8,2
+8,HIV status,X,9,2
+9,High temperature or febrile to touch?,"yes,no","10,10",0
+10,Oxygen saturation <90%,"yes,no","4,12",0
+12,RR counter,X,13,2
+13,Stridor,"yes,no","4,14",0
+14,Breath sounds,X,15,2
+15,Grunting or nasal flaring,"yes,no","4,16",0
+16,Chest indrawing,X,18,2
+18,Meets criteria for bronchodilator trial?,"yes,no","19,20",0
+19,Reassess in 15 min,X,X,4
+20,No applicable diagnosis,X,X,2
