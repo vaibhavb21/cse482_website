@@ -49,6 +49,18 @@ As shown in table above, we have 5 different types of nodes. Type 0 is a `yes/no
 
 ![MUACcsv.png](public/ReadMe_images/MUACcsv.png)
 
+## Recommended Diagnosis Page:
+
+Once the decision tree has been fully traversed, you will reach a recommended diagnosis based on your responses to the questions. At this point, you can restart Protocol by clicking on the logo which will take you back to the home page.
+
+![FinalDiagnosis.png](public/ReadMe_images/FinalDiagnosis.png)
+
+## Dark Mode:
+
+To enable Dark Mode, simply click the toggle on the top right of the app.
+
+![DarkMode.png](public/ReadMe_images/DarkMode.png)
+
 ## Acknowledgements:
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
